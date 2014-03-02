@@ -1,6 +1,6 @@
 {
   "name": "zero-blog",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A beautiful & useful blog system using Node.js.",
   "repository": {
     "type" : "git",
@@ -21,8 +21,6 @@
     "connect-mongo": "~0.4.0",
     "connect-flash": "~0.1.1"
   },
-  "devDependencies": {
-  },
   "readmeFilename": "README.md",
-  "homepage": "https://github.com/wssgcg1213/zero-blog"
+  "homepage": "https://www.zeroling.com"
 }

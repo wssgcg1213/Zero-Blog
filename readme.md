@@ -8,7 +8,15 @@ A beautiful & useful blog system using Node.js.
 
 ``` bash
     git clone https://github.com/wssgcg1213/zero-blog.git
-    cd zero-blog
+    cd zero-blog/
+    npm install
+```
+
+### Via NPM
+
+``` bash
+    npm install zero-blog
+    cd node_modules/zero-blog/
     npm install
 ```
 
@@ -25,7 +33,6 @@ and browse ```http://127.0.0.1:8888```
 ### Reg
 browse ```http://127.0.0.1:8888/admin/reg```  
 
-Please **DELETE** /views/admin/reg.ejs after reg your admin account;
 
 ### Admin
 browse ```http://127.0.0.1:8888/admin```
