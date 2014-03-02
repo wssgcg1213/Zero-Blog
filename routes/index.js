@@ -11,43 +11,51 @@ var Link = require('../models/link.js');
 var site = require('../settings.js').site;
 var getTime = require('../models/gettime.js');
 
+
 module.exports = function(nb){
     //主页
     nb.get('/', function(req, res){
-        Emotion.get(site.indexEmotionAmount, function (err, emotions) {
-            if (err) {
-                req.flash('error', "Fetch emotions error!");
-                return res.redirect('/404');
-            }
-            Post.get(site.indexPostAmount, function (err, posts) {
-                if (err) {
-                    req.flash('error', "Fetch posts error!");
-                    return res.redirect('/404');
-                }
-                Gallery.get(site.indexGalleryAmount, function (err, galleries) {
+        User.count(function(err, num){
+            if(num != 0){
+                Emotion.get(site.indexEmotionAmount, function (err, emotions) {
                     if (err) {
-                        req.flash('error', "Fetch galleries error!");
+                        req.flash('error', "Fetch emotions error!");
                         return res.redirect('/404');
                     }
-                    Link.get(site.indexLinkAmount, function (err, links) {
-						if (err) {
-							req.flash('error', "Fetch links error!");
-							return res.redirect('/404');
-						}
-						res.render('index', {
-							title: site.title,
-							site: site,
-							emotions: emotions,
-							posts: posts,
-							galleries: galleries,
-							links: links,
-							success: req.flash('success').toString(),
-							error: req.flash('error').toString()
-						});
-					});
-				});
-			});
-		});
+                    Post.get(site.indexPostAmount, function (err, posts) {
+                        if (err) {
+                            req.flash('error', "Fetch posts error!");
+                            return res.redirect('/404');
+                        }
+                        Gallery.get(site.indexGalleryAmount, function (err, galleries) {
+                            if (err) {
+                                req.flash('error', "Fetch galleries error!");
+                                return res.redirect('/404');
+                            }
+                            Link.get(site.indexLinkAmount, function (err, links) {
+                                if (err) {
+                                    req.flash('error', "Fetch links error!");
+                                    return res.redirect('/404');
+                                }
+                                res.render('index', {
+                                    title: site.title,
+                                    site: site,
+                                    emotions: emotions,
+                                    posts: posts,
+                                    galleries: galleries,
+                                    links: links,
+                                    success: req.flash('success').toString(),
+                                    error: req.flash('error').toString()
+                                });
+                            });
+                        });
+                    });
+                });
+            }else{
+                res.redirect('/admin/reg');
+            }
+        });
+        
 	});
 
 	nb.get('/emotion/:eid.html', function (req, res, next) {
@@ -205,53 +213,59 @@ module.exports = function(nb){
 
 	//后台部分
 	nb.get('/admin', function (req,res) {
-		if(!req.session.user){
-			res.render('admin/login', {
-				site: site,
-				success: req.flash('success').toString(),
-				error: req.flash('error').toString()
-			});			
-		}else{
-            Emotion.get(0, function (err, emotions) {
-                if (err) {
-                    req.flash('error', "Fetch emotions error!");
-                    return res.redirect('/404');
-                }
-                Post.get(0, function (err, posts) {
-                    if (err) {
-                        req.flash('error', "Fetch posts error!");
-                        return res.redirect('/404');
-                    }
-                    Gallery.get(0, function (err, galleries) {
+        User.count(function(err, num){
+            if(num != 0){
+                if(!req.session.user){
+                    res.render('admin/login', {
+                        site: site,
+                        success: req.flash('success').toString(),
+                        error: req.flash('error').toString()
+                    });         
+                }else{
+                    Emotion.get(0, function (err, emotions) {
                         if (err) {
-                            req.flash('error', "Fetch galleries error!");
+                            req.flash('error', "Fetch emotions error!");
                             return res.redirect('/404');
                         }
-                        Link.get(0, function (err, links) {
+                        Post.get(0, function (err, posts) {
                             if (err) {
-                                req.flash('error', "Fetch links error!");
+                                req.flash('error', "Fetch posts error!");
                                 return res.redirect('/404');
                             }
-                            posts = posts.reverse();
-                            emotions = emotions.reverse();
-                            links = links.reverse();
-                            res.render('admin/index', {
-                                title: site.title,
-                                site: site,
-                                user: req.session.user,
-                                emotions: emotions,
-                                posts: posts,
-                                galleries: galleries,
-                                links: links,
-                                success: req.flash('success').toString(),
-                                error: req.flash('error').toString()
+                            Gallery.get(0, function (err, galleries) {
+                                if (err) {
+                                    req.flash('error', "Fetch galleries error!");
+                                    return res.redirect('/404');
+                                }
+                                Link.get(0, function (err, links) {
+                                    if (err) {
+                                        req.flash('error', "Fetch links error!");
+                                        return res.redirect('/404');
+                                    }
+                                    posts = posts.reverse();
+                                    emotions = emotions.reverse();
+                                    links = links.reverse();
+                                    res.render('admin/index', {
+                                        title: site.title,
+                                        site: site,
+                                        user: req.session.user,
+                                        emotions: emotions,
+                                        posts: posts,
+                                        galleries: galleries,
+                                        links: links,
+                                        success: req.flash('success').toString(),
+                                        error: req.flash('error').toString()
+                                    });
+                                });
                             });
                         });
                     });
-                });
-            });
-		}
-	});
+                }
+            }else{
+                res.redirect('/admin/reg');
+            }
+        });
+    });
 
 	nb.get('/admin/site', preCheckLogin);
 	nb.get('/admin/site', function (req, res) {
@@ -591,45 +605,21 @@ module.exports = function(nb){
     });
 
 	nb.get('/admin/reg', function (req, res) {
-    	res.render('admin/reg', {
-    		site: site,
-    		success: req.flash('success').toString(),
-			error: req.flash('error').toString()
-    	});
-  	});
-
-	nb.post('/admin/reg', function (req, res) {
-		var name = req.body.name,
-			password = req.body.password,
-			password_re = req.body['password-repeat'];
-		if(password != password_re) {
-			req.flash('error', "Confirm-password incorrect!");
-			res.redirect('/admin/reg');
-		}
-		var md5 = crypto.createHash('md5'),
-			password_md5 = md5.update(req.body.password).digest('hex');
-		var newUser = new User({
-			name: req.body.name,
-			password: password_md5,
-			qq: req.body.qq
-		});
-
-		User.get(newUser.name, function (err, user) {
-			if(user){
-				req.flash('error', 'User exites!');
-				return res.redirect("/admin/reg");
-			}
-			newUser.save(function (err, user) {
-				if(err){
-					req.flash('error', err);
-        			return res.redirect('/admin/reg');//注册失败返回主册页
-				}
-				req.session.user = user;
-				req.flash('success', 'Reg successful!');
-				res.redirect("/admin");
-			});
-		});
-	});
+        try{
+            var reg = require('./reg.js');  
+        }catch(e){
+            if(e)return res.redirect('/admin');
+        }
+        reg.get(req, res);
+    })
+    nb.post('/admin/reg', function (req, res) {
+        try{
+            var reg = require('./reg.js');  
+        }catch(e){
+            if(e)return res.redirect('/admin');
+        }
+        reg.post(req, res);
+    })
 
 	//404
 	nb.use(function(req, res) {

@@ -1,13 +1,15 @@
 /**
  * mongoDb配置
+ * 如果开启了mongodb的auth,请更改user和password字段
+ * if you enable mongodb auth, pls change user & password field
  */
 var mongo = { 
   cookieSecret: 'nb', 
   db: 'zero-blog', 
   host: '127.0.0.1',
   port: '27017',
-  user: 'mongouser',
-  password: "mongopwd"
+  user: null,
+  password: null
 }; 
 
 /**

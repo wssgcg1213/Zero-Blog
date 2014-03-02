@@ -30,15 +30,24 @@ nb.use(express.json());
 nb.use(express.urlencoded());
 nb.use(express.methodOverride());
 nb.use(express.cookieParser());
-nb.use(express.session({
-    secret: settings.cookieSecret,
-    key: settings.db,
-    cookie: {maxAge: 1000 * 3600 * 24 * 7},
-    store: new MongoStore({
+
+var store;
+if(settings.user){
+    store = new MongoStore({
         db: settings.db,
         username: settings.user,
         password: settings.password
     })
+}else{
+    store = new MongoStore({
+        db: settings.db
+    })
+}
+nb.use(express.session({
+    secret: settings.cookieSecret,
+    key: settings.db,
+    cookie: {maxAge: 1000 * 3600 * 24 * 7},
+    store: store
 }));
 nb.use(nb.router);
 nb.use(express.static(path.join(__dirname, 'public')));
