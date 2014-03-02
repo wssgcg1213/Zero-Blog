@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= site.title %> | <%= site.subtitle %></title>
+<meta name="description" content="ZeroLing's CorNer" />
+<meta name="keywords" content="ZeroLing, zeroling, zero, blog" />
+<script type="text/javascript" src="/javascripts/function.js"></script>
+<link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/stylesheets/highlights_zero.css">
+</head>
+
+
+
+<body>
+
+<div id="header">
+    <div id="site">
+	    <div id="logo">
+		    <h1><!-- 主标题 --><a href="/" title="<%= site.title %>" ><%= site.title %></a></h1>
+			<h2><!-- 副标题  --><p><a href="/"><%= site.subtitle %></a></p></h2>
+		</div>		  
+    </div>
+	<div id="nav">
+	  <ul>
+	  	<li><a href="##" onclick="Scroller.goTo($('#emotion'))">Emotion</a></li>
+	  	<li><a href="##" onclick="Scroller.goTo($('#post'))">Posts</a></li>
+	  	<li><a href="/galleries">Gallery</a></li>
+	  </ul>
+	</div>
+    <% if (success||error) { %>
+    <div id="flash">
+        <% if (success) { %>
+        <div class="success"><%= success %></div>
+        <% } %>
+        <% if (error) { %>
+        <div class="error"><%= error %> </div>
+        <% } %>
+    </div>
+    <% } %>
+</div>
+
+<div id="main">

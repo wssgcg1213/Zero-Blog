@@ -1,0 +1,13 @@
+<%- include header %>
+    
+
+<form method="post">
+  <p>
+    <label>Are you sure want to delete Link: <%= link.content %></label>
+    <input type="hidden" name="eid" value="<%= link.lid %>" /><br />
+  </p>
+  <input class="button" type="submit" value="确定">
+</form>
+
+
+<%- include footer %>

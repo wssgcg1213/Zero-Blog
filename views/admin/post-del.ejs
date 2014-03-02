@@ -1,0 +1,13 @@
+<%- include header %>
+    
+
+<form method="post">
+  <p>
+    <label>Are you sure want to delete post: <%= post.title %></label>
+    <input type="hidden" name="pid" value="<%= post.pid %>" /><br />
+  </p>
+  <input class="button" type="submit" value="确定">
+</form>
+
+
+<%- include footer %>

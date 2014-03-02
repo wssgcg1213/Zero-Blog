@@ -1,0 +1,15 @@
+<li id="emotion">
+	<div class="wrap">
+		<em class="format-ico emotion-ico">心情</em>
+		<div class="format-content">
+			<ul class="emotion-content">
+				<% for(var i = 0; i<emotions.length; i++){ %>
+					<li class="emotion-cell">
+						<a href="emotion/<%= emotions[i].eid %>.html"><%= emotions[i].content %></a>
+						<i><%= emotions[i].time.minute %></i>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+	</div>
+</li>

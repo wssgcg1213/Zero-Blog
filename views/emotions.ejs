@@ -1,0 +1,22 @@
+<%- include header %>
+
+<li id="emotion">
+	<div class="wrap">
+		<em class="format-ico emotion-ico">心情</em>
+		<div class="format-content">
+			<div class="emotion-content">
+				<div class="emotion-content-one">
+					<%= emotion.content %>
+				</div>
+				<div class="emotion-info">
+					<span class="emotion-time">发布时间: <%= emotion.time.minute %></span>
+					<span class="emotion-pv">点击: <%= emotion.pv %>次</span>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</li>
+<%- include module.comment.ejs %>
+<%- include module.link.ejs %>
+<%- include footer %>

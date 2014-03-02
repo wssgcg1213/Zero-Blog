@@ -1,0 +1,18 @@
+<%- include header %>
+
+<li id="post">
+	<div class="wrap">
+		<em class="format-ico post-ico">文章</em>
+		<div class="format-content">
+			<h1 class="post-title"><%= post.title %></h1>
+			<div class="post-content"><%- post.content %></div>
+			<div class="post-info-one">
+					<span class="post-time">发布时间: <%= post.time.minute %></span>
+					<span class="post-pv">点击: <%= post.pv %>次</span>
+			</div>
+		</div>
+	</div>
+</li>
+<%- include module.comment.ejs %>
+<%- include module.link.ejs %>
+<%- include footer %>

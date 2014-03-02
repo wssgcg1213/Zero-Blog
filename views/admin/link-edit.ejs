@@ -1,0 +1,11 @@
+<%- include header %>
+    
+
+<form method="post">
+	<p><input class="text-input small-input" placeholder="链接标题" type="text" name="content" value="<%= link.content %>"/></p>
+    <p><input class="text-input large-input" placeholder="链接URL" type="text" name="url" value="<%= link.url %>"/></p>
+    <input class="button" type="submit" value="修改URL!" />
+</form>
+
+
+<%- include footer %>

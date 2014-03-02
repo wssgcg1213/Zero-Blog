@@ -1,0 +1,23 @@
+<li id="post">
+	<div class="wrap">
+		<em class="format-ico post-ico">文章</em>
+		<div class="format-content">
+			<ul class="post-content">
+				<% for(var i = 0; i<posts.length; i++){ %>
+					<li class="post-cell">
+						<a href="post/<%= posts[i].pid %>.html" rel="点击阅读 <%= posts[i].title %>" title="<%= posts[i].title %>">
+							<p><%- posts[i].content %></p>
+						</a>
+						<h3><a href="post/<%= posts[i].pid %>.html" title="<%= posts[i].title %>"><%= posts[i].titlesub %></a></h3>
+						<div class="post-info">
+							<sapn class="post-date"><%= posts[i].time.day %></sapn>
+							<span class="post-view">点击: <%= posts[i].pv %>次</span>
+                            <span class="post-comment">评论: <%= posts[i].comments.length %>条</span>
+						</div>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+		
+	</div>
+</li>

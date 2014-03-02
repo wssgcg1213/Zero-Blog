@@ -1,0 +1,44 @@
+<div id="comment">
+	<div class="wrap">
+		<em class="format-ico comment-ico">评论</em>
+		<div class="format-content">
+			<div class="comment-content">
+                <div class="comment-respond">
+                    <form method="POST">
+                        <div id="click-show">
+                            <div>
+                                <input class="comment-name" type="text" name="name" placeholder="昵称"/>
+                                <label>昵称<span class="red">*</span></label>
+                            </div>
+                            <div>
+                                <input class="comment-qq" type="text" name="qq" placeholder="QQ号码"/>
+                                <label>QQ</label>
+                            </div>
+                            <div>
+                                <input class="comment-url" type="text" name="url" placeholder="网址"/>
+                                <label>网址</label>
+                            </div>
+                        </div>
+                        <textarea name="content" onclick="document.getElementById('click-show').style.height='150px'" cols="30" rows="10" placeholder="写点什么把..."></textarea>
+                        <a class="btn" href="##" id="submit">提交!</a>
+                    </form>
+                </div>
+                 <ol class="comment-list">
+                     <% for(var j = 0; j<comments.length; j++){ %>
+                     <li class="comment-cell" id="div-comment">
+                         <div class="comment-author">
+                             <a href="<%= comments[j].url %>" rel="nofollow"><img src="/images/head/<%= comments[j].qq %>.png" class="avatar"></a>
+                             <a href="<%= comments[j].url %>" rel="nofollow"><strong><%= comments[j].name %></strong></a> :
+                             <span class="datetime"><%= comments[j].time.minute %></span>
+                             <span class="at">@<%= comments[j].name %></span>
+                         </div>
+                         <p><%- comments[j].content %></p>
+                         <div class="clear"></div>
+                     </li>
+                     <% } %>
+                 </ol>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/javascripts/comment.js"></script>

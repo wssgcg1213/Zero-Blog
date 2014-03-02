@@ -1,0 +1,27 @@
+<%- include header %>
+    
+
+<form method="post">
+  <p>
+    <label>标题：</label>
+    <input class="text-input small-input" type="text" name="title" value="<%= post.title %>" /><br />
+  </p>
+  <p>
+    <label>标签：</label>
+    <input class="text-input small-input" type="text" name="tags" value="<%= post.tags %>" /><br />
+  </p>
+   <p>
+    <label>时间：</label>
+    <input class="text-input small-input" type="text" name="time" value="<%= post.time.minute %>" /><br />
+  </p>
+  <p>
+    <label>正文：</label>
+    <textarea name="content" rows="20" cols="100"><%= post.content %></textarea><br />
+  </p>
+  <p>
+    <input class="button" type="submit" value="发表!" />
+  </p>  
+</form>
+
+
+<%- include footer %>

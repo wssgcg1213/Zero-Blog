@@ -1,0 +1,23 @@
+<%- include header %>
+    
+
+<form method="post">
+  <p>
+    <label>标题：</label>
+    <input class="text-input small-input" type="text" name="title" /><br />
+  </p>
+  <p>
+    <label>标签：</label>
+    <input class="text-input small-input" type="text" name="tags" /><br />
+  </p>
+  <p>
+    <label>正文：</label>
+    <textarea name="content" rows="20" cols="100"></textarea><br />
+  </p>
+  <p>
+    <input class="button" type="submit" value="发表!" />
+  </p>  
+</form>
+
+
+<%- include footer %>

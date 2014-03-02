@@ -1,0 +1,10 @@
+
+.idea/
+.git/
+public/images/head/*
+
+access.log
+
+error.log
+
+
