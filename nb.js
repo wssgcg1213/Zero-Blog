@@ -10,7 +10,7 @@ var path = require('path');
 var fs = require('fs');
 var MongoStore = require('connect-mongo')(express);
 var flash = require('connect-flash');
-var settings = require('./settings');
+var settings = require('./settings').mongo;
 
 var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
 var errorLog = fs.createWriteStream('error.log', {flags: 'a'});

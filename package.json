@@ -1,6 +1,11 @@
 {
   "name": "zero-blog",
   "version": "0.1.2",
+  "description": "A beautiful & useful blog system using Node.js.",
+  "author": {
+    "name": "ZeroLing",
+    "url": "http://zeroling.com"
+  },
   "scripts": {
     "start": "node nb.js"
   },
@@ -12,5 +17,7 @@
     "connect-mongo": "~0.4.0",
     "connect-flash": "~0.1.1",
     "forever-webui": "~0.1.6"
-  }
+  },
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/wssgcg1213/zero-blog"
 }
