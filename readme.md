@@ -1,5 +1,8 @@
 # Zero-Blog
 
+(大一下学期开学前寒假写的) 用 nodejs + express + mongodb 的一套比较完善的博客系统, 带说说 / 文章 / 图库 / 友链 等几大功能, 有后台, 唯一的缺点就是 model 层使用了原生 mongodb 模块, 多层回调没有解开. 现在的地址是: http://old.zeroling.com/ 
+//add at 2015-04-09
+
 A beautiful & useful blog system using Node.js.
 
 ## Installation
